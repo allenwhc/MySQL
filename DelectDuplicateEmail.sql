@@ -1,0 +1,14 @@
+USE exercise;
+
+DELETE E
+FROM email AS E
+LEFT OUTER JOIN
+(
+	SELECT MIN(id) AS id, Email AS Email
+	FROM email
+	GROUP BY Email
+) AS NEW_EMAIL
+ON NEW_EMAIL.id=E.id
+WHERE NEW_EMAIL.id IS NULL
+AND E.id IS NOT NULL;
+SELECT * FROM email;
